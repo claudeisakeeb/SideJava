@@ -5,12 +5,12 @@ public class Song {
 	public Song (String t, String a) {
 		title = t;
 		artist = a;
-		file = t.replace(" ", "_");
+		file = t.replace(" ", "_") + ".mp3";
 	}
 	
 	public void setTitle(String t) {
 		title = t;
-		file = t.replace(" ", "_");
+		file = t.replace(" ", "_") +".mp3";
 	}
 	
 	public void setArtist(String a) {

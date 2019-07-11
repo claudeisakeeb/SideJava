@@ -1,4 +1,9 @@
 import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import java.util.Scanner;
 
 public class Playlist {
@@ -103,9 +108,21 @@ public class Playlist {
 		}
 		
 		if (shuffle == false) {
-			for (int i = 0; i < playlist.size(); i++) {
-				System.out.println("Now playing: " + playlist.get(i).toString());
+			for(int i = 0; i < playlist.size(); i++) {
+				
+			try {
+			FileInputStream fileInputStream = new FileInputStream(playlist.get(i).getFile());
+			Player player = new Player(fileInputStream);
+			System.out.println("Now playing: " +playlist.get(i).getTitle());
+			player.play();
+			
+			} catch(FileNotFoundException e) {
+				e.printStackTrace();
+			}catch(JavaLayerException e) {
+				e.printStackTrace();
 			}
+			}
+			
 		}
 		else {
 			int len = playlist.size();
@@ -115,10 +132,20 @@ public class Playlist {
 				playingList.add(0, temp.get(pos));
 				temp.remove(pos);
 			}
-			for (int i = 0; i < playingList.size(); i++) {
-				System.out.println("Now playing: " + playingList.get(i).toString());
-
-			}
+			for(int i = 0; i < playingList.size(); i++) {
+				
+				try {
+				FileInputStream fileInputStream = new FileInputStream(playingList.get(i).getFile());
+				Player player = new Player(fileInputStream);
+				System.out.println("Now playing: " +playingList.get(i).getTitle());
+				player.play();
+				
+				} catch(FileNotFoundException e) {
+					e.printStackTrace();
+				}catch(JavaLayerException e) {
+					e.printStackTrace();
+				}
+				}
 		}
 	}
 	

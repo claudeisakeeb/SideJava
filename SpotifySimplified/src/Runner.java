@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import java.util.Scanner;
 
 public class Runner{
@@ -9,9 +11,9 @@ public class Runner{
 		
 		ArrayList<Song> songs = new ArrayList<Song>();
 		
-		songs.add(new Song("One Man", "Kim Jong Kook"));
+		songs.add(new Song("Dream", "Suzy"));
 		songs.add(new Song("FANCY", "TWICE"));
-		songs.add(new Song("SunnySideUp", "Red Velvet"));
+		songs.add(new Song("Bad Boy", "Red Velvet"));
 		
 		Playlist test = new Playlist(songs);
 		
