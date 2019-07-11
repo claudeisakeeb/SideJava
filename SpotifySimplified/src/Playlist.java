@@ -132,6 +132,7 @@ public class Playlist {
 				playingList.add(0, temp.get(pos));
 				temp.remove(pos);
 			}
+			System.out.println(playingList);
 			for(int i = 0; i < playingList.size(); i++) {
 				
 				try {
