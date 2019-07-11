@@ -4,19 +4,20 @@ import java.util.Scanner;
 public class Runner{
 	public static void main(String[] args) {
 		
+		@SuppressWarnings("resource")
 		Scanner keyboard = new Scanner (System.in);
 		
-		ArrayList<String> songTitles = new ArrayList<String>();
+		ArrayList<Song> songs = new ArrayList<Song>();
 		
-		songTitles.add("One Man");
-		songTitles.add("FANCY");
-		songTitles.add("SunnySideUp");
+		songs.add(new Song("One Man", "Kim Jong Kook"));
+		songs.add(new Song("FANCY", "TWICE"));
+		songs.add(new Song("SunnySideUp", "Red Velvet"));
 		
-		Playlist test = new Playlist(songTitles);
+		Playlist test = new Playlist(songs);
 		
 		String response = " ";
 		
-		while (!response.contentEquals("Q")) {
+		while (!response.toUpperCase().contentEquals("Q")) {
 			System.out.print("\n");
 			System.out.println("*****MENU*****");
 			System.out.println("(1) Play playlist" + "\n"
@@ -35,20 +36,29 @@ public class Runner{
 			//keyboard response 2
 			else if (response.equals("2")) {
 				System.out.println("Enter the name of the song you would like to add: ");
-				String song = keyboard.next();
-				test.addToPlaylist(song);
+				keyboard.nextLine();
+				String song = keyboard.nextLine();
+				System.out.println("Enter the artist of the song you would like to remove: ");
+				String artist = keyboard.nextLine();
+				test.addToPlaylist(song, artist);
 			}
 			//keyboard response 3
 			else if (response.equals("3")) {
 				System.out.println("Enter the name of the song you would like to remove: ");
-				String song = keyboard.next();
-				test.removeFromPlaylist(song);
+				keyboard.nextLine();
+				String song = keyboard.nextLine();
+				System.out.println("Enter the artist of the song you would like to remove: ");
+				String artist = keyboard.nextLine();
+				test.removeFromPlaylist(song, artist);
 			}
 			//keyboard response 4
 			else if (response.equals("4")) {
 				System.out.println("Enter the name of the song whose duplicates you would like to remove: ");
-				String song = keyboard.next();
-				test.removeDuplicates(song);
+				keyboard.nextLine();
+				String song = keyboard.nextLine();
+				System.out.println("Enter the artist of the song whose duplicates you would like to remove: ");
+				String artist = keyboard.nextLine();
+				test.removeDuplicates(song, artist);
 			}
 			else if (response.equals("5")) {
 				System.out.println(test);
