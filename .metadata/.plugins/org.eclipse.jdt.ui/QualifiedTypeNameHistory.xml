@@ -2,4 +2,7 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
+<fullyQualifiedTypeName name="javazoom.jl.player.advanced.AdvancedPlayer"/>
+<fullyQualifiedTypeName name="javazoom.jl.player.advanced.PlaybackListener"/>
+<fullyQualifiedTypeName name="javazoom.jl.player.advanced.PlaybackEvent"/>
 </qualifiedTypeNameHistroy>

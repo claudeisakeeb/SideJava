@@ -1,9 +1,12 @@
 import java.util.ArrayList;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+
 import java.util.Scanner;
 
 public class Playlist {
@@ -112,10 +115,10 @@ public class Playlist {
 				
 			try {
 			FileInputStream fileInputStream = new FileInputStream(playlist.get(i).getFile());
-			Player player = new Player(fileInputStream);
+			AdvancedPlayer player = new AdvancedPlayer(fileInputStream);
 			System.out.println("Now playing: " +playlist.get(i).getTitle());
-			player.play();
-			
+			boolean playing = true;		
+			player.play();			
 			} catch(FileNotFoundException e) {
 				e.printStackTrace();
 			}catch(JavaLayerException e) {
@@ -128,7 +131,6 @@ public class Playlist {
 			int len = playlist.size();
 			for (int i = len-1; i > -1; i--) {
 				int pos = (int) Math.floor((Math.random() *(i+1)));
-				System.out.println(pos);
 				playingList.add(0, temp.get(pos));
 				temp.remove(pos);
 			}
@@ -150,6 +152,33 @@ public class Playlist {
 		}
 	}
 	
+	public void sortByTitle(ArrayList<Song> playlist) {
+		for (int i = 0; i < playlist.size(); i++) {
+			for (int j = 0; j < playlist.size()-1;j++) {
+				if (playlist.get(j).getTitle().compareTo(playlist.get(j+1).getTitle()) > 0) {
+					Song temp = playlist.get(j);
+					playlist.set(j, playlist.get(j+1));
+					playlist.set(j+1, temp);
+				}
+			}
+		}
+		System.out.println("Your playlist has been successfully sorted by song title!");
+		System.out.println(playlist);
+	}
+	
+	public void sortByArtist(ArrayList<Song> playlist) {
+		for (int i = 0; i < playlist.size(); i++) {
+			for (int j = 0; j < playlist.size()-1;j++) {
+				if (playlist.get(j).getArtist().compareTo(playlist.get(j+1).getArtist()) > 0) {
+					Song temp = playlist.get(j);
+					playlist.set(j, playlist.get(j+1));
+					playlist.set(j+1, temp);
+				}
+			}
+		}
+		System.out.println("Your playlist has been successfully sorted by artist!");
+		System.out.println(playlist);
+	}
 	
 	public String toString() {
 		return playlist.toString();
