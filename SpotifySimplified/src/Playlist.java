@@ -95,6 +95,7 @@ public class Playlist {
 	
 	public void play() {
 		boolean shuffle;
+		String playResponse = "";
 		ArrayList<Song> playingList = new ArrayList<Song>();
 		ArrayList<Song> temp = new ArrayList<Song>();
 		
@@ -111,6 +112,9 @@ public class Playlist {
 		}
 		
 		if (shuffle == false) {
+			//plays audio
+			
+			/*
 			for(int i = 0; i < playlist.size(); i++) {
 				
 			try {
@@ -125,7 +129,24 @@ public class Playlist {
 				e.printStackTrace();
 			}
 			}
+			*/
+		
+		while (!playResponse.toUpperCase().equals("Q")) {
+			System.out.println(playingList);
+			System.out.println("*****PLAYING MENU*****");
+			System.out.println("(1) Add a song to queue" + "\n"
+							 + "(2) Skip song" + "\n"
+							 + "(Q) Quit playing");
+			playResponse = keyboard.nextLine();
 			
+			//add song to queue
+			System.out.println("Input the name of the song you would like to add to queue: ");
+			keyboard.nextLine();
+			String name = keyboard.nextLine();
+			System.out.println("Input the artist of the song you would like to add to queue: ");
+			String artist = keyboard.nextLine();
+			System.out.println(name + artist);
+		}
 		}
 		else {
 			int len = playlist.size();
@@ -135,6 +156,8 @@ public class Playlist {
 				temp.remove(pos);
 			}
 			System.out.println(playingList);
+			
+			/*
 			for(int i = 0; i < playingList.size(); i++) {
 				
 				try {
@@ -149,6 +172,7 @@ public class Playlist {
 					e.printStackTrace();
 				}
 				}
+				*/
 		}
 	}
 	
