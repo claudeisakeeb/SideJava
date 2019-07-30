@@ -96,6 +96,7 @@ public class Playlist {
 	public void play() {
 		String playResponse = "";
 		ArrayList<Song> playingList = new ArrayList<Song>();
+		ArrayList<Song> discardList = new ArrayList<Song>();
 
 			//plays audio
 			
@@ -120,27 +121,42 @@ public class Playlist {
 		}
 		
 		while (!playResponse.toUpperCase().equals("Q")) {
+			System.out.println();
 			System.out.println("Current queue: " + playingList);
 			System.out.println("Now playing: " +playingList.get(0));
 			System.out.println("*****PLAYING MENU*****");
 			System.out.println("(1) Next song" + "\n"
-							 + "(2) Add a song to queue" + "\n"
-							 + "(3) Shuffle playlist" + "\n"
+							 + "(2) Previous song" + "\n"
+							 + "(3) Add a song to queue" + "\n"
+							 + "(4) Shuffle playlist" + "\n"
+							 + "(5) View play history" + "\n"
 							 + "(Q) Quit playing");
 			playResponse = keyboard.next();
 			
 			//next song
 			if (playResponse.contentEquals("1")) {
 				if (playingList.size() > 1) {
-					playingList.remove(0);
+					discardList.add(playingList.remove(0));
+					System.out.println("Skip to next song successful!");
 				}
 				else {
 					System.out.println("There is no next song!");
 				}
 			}//end next song
 			
-			//add song to queue
+			//previous song
 			else if (playResponse.equals("2")) {
+				if (discardList.size() < 1) {
+					System.out.println("There is no previous song!");
+				}
+				else {
+					playingList.add(0, discardList.remove(discardList.size()-1));
+					System.out.println("Revert to previous song successful!");
+				}
+			}//end previous song
+			
+			//add song to queue
+			else if (playResponse.equals("3")) {
 			System.out.println("Input the name of the song you would like to add to queue: ");
 			keyboard.nextLine();
 			String name = keyboard.nextLine();
@@ -168,7 +184,7 @@ public class Playlist {
 			}//end add song to queue
 			
 			//shuffle playlist
-			else if (playResponse.contentEquals("3")) {
+			else if (playResponse.contentEquals("4")) {
 				if (playingList.size() < 3) {
 					System.out.println("There aren't enough songs to shuffle (At least 2 in queue required)");
 				}
@@ -188,7 +204,13 @@ public class Playlist {
 				}
 				}//end else
 			}
-			}
+			
+			//view play history
+			else if (playResponse.contentEquals("5")) {
+				System.out.println("Play history: " +discardList);
+			}//end view play history
+			
+			}//end while loop
 	}//end play
 	
 	public void sortByTitle(ArrayList<Song> playlist) {
