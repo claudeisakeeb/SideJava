@@ -15,6 +15,8 @@ public class Runner{
 		songs.add(new Song("Dream", "Suzy"));
 		songs.add(new Song("FANCY", "TWICE"));
 		songs.add(new Song("Bad Boy", "Red Velvet"));
+		songs.add(new Song("ICY", "ITZY"));
+		songs.add(new Song("LOVE SCENARIO", "IKON"));
 		
 		Playlist test = new Playlist(songs);
 		

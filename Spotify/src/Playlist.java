@@ -43,7 +43,7 @@ public class Playlist {
 			playlist.add(new Song(t, a));
 			System.out.println(t + " by " +a +" has been added to your playlist!");
 		}
-	}
+	}//end add to playlist
 	
 	public void removeFromPlaylist(String t, String a) {
 		boolean present = false;
@@ -60,7 +60,7 @@ public class Playlist {
 		else {
 			System.out.println("Song removal successful - all copies of " +t +" by " +a +" have been removed from your playlist!");
 		}
-	}
+	}//end remove from playlist
 	
 	public void removeDuplicates(String t, String a) {
 		boolean dupes = false;
@@ -91,27 +91,12 @@ public class Playlist {
 			}
 			System.out.println("Duplicates of " +t +" by " +a + " were removed successfully");
 		}
-	}
+	}//end remove duplicates
 	
 	public void play() {
-		boolean shuffle;
 		String playResponse = "";
 		ArrayList<Song> playingList = new ArrayList<Song>();
-		ArrayList<Song> temp = new ArrayList<Song>();
-		
-		for (Song s : playlist) {
-			temp.add(s);
-		}
-		System.out.println("Shuffle? Type (y/n): ");
-		String shuffleResponse = keyboard.next();
-		if (shuffleResponse.toUpperCase().equals("Y")) {
-			shuffle = true;
-		}
-		else {
-			shuffle = false;
-		}
-		
-		if (shuffle == false) {
+
 			//plays audio
 			
 			/*
@@ -135,7 +120,7 @@ public class Playlist {
 		}
 		
 		while (!playResponse.toUpperCase().equals("Q")) {
-			System.out.println("Current queue: " +playingList);
+			System.out.println("Current queue: " + playingList);
 			System.out.println("Now playing: " +playingList.get(0));
 			System.out.println("*****PLAYING MENU*****");
 			System.out.println("(1) Next song" + "\n"
@@ -146,9 +131,12 @@ public class Playlist {
 			
 			//next song
 			if (playResponse.contentEquals("1")) {
-				playingList.remove(0);
-				System.out.println("Current queue: +playingList");
-				System.out.println("Now playing: " +playingList.get(0));
+				if (playingList.size() > 1) {
+					playingList.remove(0);
+				}
+				else {
+					System.out.println("There is no next song!");
+				}
 			}//end next song
 			
 			//add song to queue
@@ -192,41 +180,16 @@ public class Playlist {
 					break;
 				}
 				
-				int len = playingList.size() - startpos;
 				for (int pos = startpos; pos < playingList.size(); pos ++) {
-					int tempr = (int) Math.random() * (playingList.size() - pos) + pos;
+					int tempr = (int) (Math.random() * (playingList.size()-pos) + pos);
+					Song temporary = playingList.get(tempr);
+					playingList.set(tempr, playlist.get(pos));
+					playingList.set(pos, temporary);
 				}
 				}//end else
 			}
 			}
-		}
-		else {
-			int len = playlist.size();
-			for (int i = len-1; i > -1; i--) {
-				int pos = (int) Math.floor((Math.random() *(i+1)));
-				playingList.add(0, temp.get(pos));
-				temp.remove(pos);
-			}
-			System.out.println(playingList);
-			
-			/*
-			for(int i = 0; i < playingList.size(); i++) {
-				
-				try {
-				FileInputStream fileInputStream = new FileInputStream(playingList.get(i).getFile());
-				Player player = new Player(fileInputStream);
-				System.out.println("Now playing: " +playingList.get(i).getTitle());
-				player.play();
-				
-				} catch(FileNotFoundException e) {
-					e.printStackTrace();
-				}catch(JavaLayerException e) {
-					e.printStackTrace();
-				}
-				}
-				*/
-		}
-	}
+	}//end play
 	
 	public void sortByTitle(ArrayList<Song> playlist) {
 		for (int i = 0; i < playlist.size(); i++) {
@@ -240,7 +203,7 @@ public class Playlist {
 		}
 		System.out.println("Your playlist has been successfully sorted by song title!");
 		System.out.println(playlist);
-	}
+	}//end sort by title
 	
 	public void sortByArtist(ArrayList<Song> playlist) {
 		for (int i = 0; i < playlist.size(); i++) {
@@ -254,7 +217,7 @@ public class Playlist {
 		}
 		System.out.println("Your playlist has been successfully sorted by artist!");
 		System.out.println(playlist);
-	}
+	}//end sort by artist
 	
 	public String toString() {
 		return playlist.toString();
